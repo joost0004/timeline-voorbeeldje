@@ -1,0 +1,105 @@
+@use '../../styles/variables' as *;
+
+.card {
+    background: $color-glass-bg;
+    backdrop-filter: blur(12px);
+    border: 1px solid $color-glass-border;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3),
+        0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 400px;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: $gradient-brand;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4),
+            0 10px 10px -5px rgba(0, 0, 0, 0.4);
+        border-color: rgba(129, 140, 248, 0.4);
+
+        &::before {
+            opacity: 1;
+        }
+
+        .card__header {
+            background: $gradient-header-hover;
+        }
+    }
+
+    &__header {
+        padding: 24px;
+        background: $gradient-header;
+        transition: background 0.4s ease;
+
+        &-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: $color-text-white;
+            letter-spacing: -0.025em;
+            margin-bottom: 4px;
+        }
+
+        &-subtitle {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: $color-text-glass-muted;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+
+            p:not(:last-child)::after {
+                content: '•';
+                margin-left: 8px;
+                opacity: 0.5;
+            }
+        }
+    }
+
+    &__body {
+        padding: 24px;
+        background: transparent;
+        color: $color-text-secondary;
+
+        .card__description {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: $color-text-secondary;
+        }
+
+        .card__highlights {
+            padding-left: 0;
+            list-style-type: none;
+
+            li {
+                font-size: 0.875rem;
+                margin-bottom: 12px;
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                color: $color-text-muted;
+
+                &::before {
+                    content: '→';
+                    color: $color-primary;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
